@@ -1,0 +1,128 @@
+<html>
+<head>
+
+<style>
+.center{
+margin-left:auto;
+margin-right:auto;
+}
+body{
+background:#C5E1A5;
+
+}
+.button {
+
+  background-color:red;
+  border: none;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+</style>
+</head>
+<body>
+<form name="myform" method="get" onsubmit="login.htm>
+<table class="center">
+<tr>
+
+<td><h1>Registration Form </h1></td>
+
+</tr>
+<tr>
+<td>Name:</td>
+<td><input type="text" id="utext" name="utext" required></td>
+</tr>
+<td>Email:</td>
+<td><input type="email" id="uemail" name="uemail" required></td>
+</tr>
+<td>Password:</td>
+<td><input type="password" id="upass" name="upass" required></td>
+</tr>
+<td>Gender:</td>
+<td><input type="radio" name="ugenger">Male
+<input type="radio" name="ugender">Female</td>
+</tr>
+<td>Contact:</td>
+<td><input type="phone" id="uphn" name="uphn" required></td>
+</tr>
+<tr>
+<td>Address:</td>
+<td><input type="text" id="uadd" name="uadd" required></td>
+</tr>
+<tr>
+<td>state:</td>
+<td>
+<select id="selecstate" name="ustate">
+<option value="AndhraPradesh">Andhra Pradesh</option>
+<option value="Assam">Assam</option>
+<option value="Bihar">Bihar</option>
+<option value="Chandigarh">Chadigarh</option>
+</select>
+</td>
+</tr>
+<tr>
+<td>city</td>
+<td>
+<select id="seleccity" name="ucity">
+<option value="hyderabad">hyderabad</option>
+<option value="Mumbai">Mumbai</option>
+<option value="kerela">Kerela</option>
+<option value="nagpur">Nagpur</option>
+</select>
+</td>
+</tr>
+
+<td>Country:</td>
+<td>
+<select id="seleccountry" name="ucountry">
+<option value="India">India</option>
+<option value="Iraq">Iraq</option>
+<option value="SouthAfrica">South Africa</option>
+<option value="America">America</option>
+</select>
+</td>
+</tr>
+<tr>
+<td><a href="Login.html"><input class="button" style="margin-left:50%" type="submit"  value="submit" onclick=check();></a></td>
+</tr>
+</table>
+</form>
+<p id="f1">
+
+</p>
+<p id="f2">
+</p>
+<p id="f3">
+</p>
+<p id="f4">
+</p>
+<p id="f5">
+</p>
+<p id="f6">
+</p>
+<p id="f7">
+</p>
+<p id="f8">
+</p>
+<script>
+function check()
+{
+document.getElementById('f1').innerHTML=document.myform.utext.value;
+document.getElementById('f2').innerHTML=document.myform.uemail.value;
+document.getElementById('f3').innerHTML=document.myform.ugender.value;
+document.getElementById('f4').innerHTML=document.myform.uphn.value;
+document.getElementById('f5').innerHTML=document.myform.uadd.value;
+document.getElementById('f6').innerHTML=document.myform.ustate.value;
+document.getElementById('f7').innerHTML=document.myform.ucity.value;
+document.getElementById('f8').innerHTML=document.myform.ucountry.value;
+
+
+
+}
+
+</script>
+</body>
+</html>

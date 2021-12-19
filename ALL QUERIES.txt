@@ -1,0 +1,160 @@
+#TABLE CREATION
+CREATE TABLE customer_info
+(
+customer_key int PRIMARY KEY,
+customer_name varchar(50) NOTNULL,
+customer_residential_country varchar(50) NOTNULL
+)
+
+
+
+CREATE TABLE Account_info
+(
+account_key varchar(50) PRIMARY KEY,
+customer_key int NOTNULL,
+account_open_date date NOTNULL,
+FOREIGN KEY (customer_key) REFERENCES customer_info(customer_key)
+)
+
+
+CREATE TABLE Transaction
+(
+transfer_key varchar(10) NOTNULL,
+account_key varchar(50) NOTNULL,
+transaction_amt double NOTNULL,
+transaction_type varchar(20) NOTNULL,
+country_code varchar(10) NOTNULL,
+transfer_date date NOTNULL,
+FOREIGN KEY (account_key) REFERENCES Account_info(account_key)
+)
+
+
+#INSTERTING VALUES
+#Customer_info
+insert into customer_info(customer_key,customer_name,customer_residential_country)
+values(1245363788_00,'TARUN','INDIA')
+#Transaction Table
+insert into Transaction (transfer_key , account_key , transaction_amt , transaction_type , country_code , transfer_date)
+Values ('K1','CASP_D04050165300009',50,'INN','IND','2016-3-05');
+
+#Account_info
+
+insert into Account_info (account_key , customer_key , account_open_date)
+Values ('CASP_D04050165300009',1245363788_00,'2008-5-08');
+
+
+
+
+
+
+#H1
+
+select c.customer_key from Transaction t, Account_info a, Customer_info c
+where t.account_key = a.account_key and a.customer_key = c.customer_key and t.transaction_type = 'INN'
+OR t.transaction_type = 'OUT'
+group by
+MONTH(t.transfer_date)
+HAVING count(t.transfer_key) >= 10;
+
+
+#H2
+
+select c.customer_key from transaction t, Account_info a, Customer_info c
+where t.account_key = a.account_key and a.customer_key = c.customer_key and t.transaction_type = 'INN'
+group by
+MONTH(t.transfer_date)
+HAVING SUM(t.transaction_amt) >= 1000;
+
+#H3
+
+select c.customer_key from transaction t, Account_info a, Customer_info c
+where t.account_key = a.account_key and a.customer_key = c.customer_key and t.transaction_type = 'OUT'
+group by
+MONTH(t.transfer_date)
+HAVING  SUM(t.transaction_amt) >= 800;
+
+#H4
+
+select c.customer_key from Transaction t, Account_info a, Customer_info c
+where t.account_key = a.account_key and a.customer_key = c.customer_key
+group by
+t.transfer_date,
+c.customer_key
+HAVING count(t.transfer_key) >= 20;
+
+
+
+
+#M1
+
+select c.customer_key from Transaction t, Account_info a, Customer_info c
+where where t.account_key = a.account_key and a.customer_key = c.customer_key and t.transaction_type = 'INN' OR t.transaction_type = 'OUT'
+group by MONTH(t.transfer_date)
+HAVING count(t.transfer_key) >= 6;
+
+#M2
+
+select c.customer_key from transaction t, Account_info a, Customer_info c
+where t.account_key = a.account_key and a.customer_key = c.customer_key and t.transaction_type = 'INN'
+group by MONTH(t.transfer_date)
+HAVING  SUM(t.transaction_amt) >= 600;
+
+#M3
+
+select c.customer_key from transaction t, Account_info a, Customer_info c
+where t.account_key = a.account_key and a.customer_key = c.customer_key and t.transaction_type = 'OUT'
+group by MONTH(t.transfer_date)
+HAVING SUM(t.transaction_amt) >= 500;
+
+#M4
+
+select c.customer_key from Transaction t, Account_info a, Customer_info c
+where t.account_key = a.account_key and a.customer_key = c.customer_key
+group by t.transfer_date, c.customer_key;
+HAVING count(t.transfer_key) >= 20;
+
+
+
+#L1
+
+select c.customer_key from Transaction t, Account_info a, Customer_info c
+where where t.account_key = a.account_key and a.customer_key = c.customer_key and t.country_code = 'IND' and t.transaction_type = 'INN' OR t.transaction_type = 'OUT'
+group by MONTH(t.transfer_date)
+HAVING count(transfer_key) < 10;
+
+#L2
+
+select c.customer_key from transaction t, Account_info a, Customer_info c
+where t.account_key = a.account_key and a.customer_key = c.customer_key and t.transaction_type = 'INN'
+group by MONTH(t.transfer_date)
+HAVING SUM(t.transaction_amt) < 600;
+
+
+#L3
+
+select c.customer_key from transaction t, Account_info a, Customer_info c
+where t.account_key = a.account_key and a.customer_key = c.customer_key and t.transaction_type = 'OUT'
+group by MONTH(t.transfer_date)
+HAVING SUM(t.transaction_amt) < 500;
+
+
+#L4
+
+select c.customer_key from Transaction t, Account_info a, Customer_info c
+where t.account_key = a.account_key and a.customer_key = c.customer_key
+group by t.transfer_date
+HAVING count(t.transfer_key) < 10;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

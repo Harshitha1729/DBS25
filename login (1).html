@@ -1,0 +1,126 @@
+</!DOCTYPE html>
+<html>
+<head>
+	<title>Login Page</title>
+	<style type="text/css">
+
+		body 
+		{
+			font-family: Lucida Console,Courier New, monospace;	
+		}
+		.simpleform
+		{
+			text-align: center;
+			margin: 10px 400px;
+		}
+		input[type=text], input[type=password] {
+  			width: 100%;
+  			padding: 12px 20px;
+  			margin: 8px 0;
+  			display: inline-block;
+  			border: 1px solid #ccc;
+  			box-sizing: border-box;
+		}
+		#abc {
+		  	width: 200px;
+			padding: 10px 18px;
+			border-radius: 5px;
+			outline: 0px;
+			background-color: indigo;
+			border: 2px solid black;
+			color: aliceblue;
+			font-size: 18px;
+		}
+		#xyz {
+		  	width: 200px;
+			padding: 10px 18px;
+			border-radius: 5px;
+			outline: 0px;
+			background-color: #f44336;
+			border: 2px solid black;
+			color: aliceblue;
+			font-size: 18px;
+		}
+		button:hover {
+  			opacity: 0.8;
+		}
+
+		.cancelbtn {
+  			width: 200px;
+ 		 	padding: 10px 18px;
+  			background-color: #f44336;
+		}
+		.wrapper {
+  			text-align: center;
+  			display: inline-block;
+  			position: absolute;
+  			top: 50%;
+  			left: 50%;
+		}
+
+	</style>
+	<script type="text/javascript">
+		function validateform(){  
+				var name=document.myform.name.value;  
+				var password=document.myform.password.value;  
+				  
+				if (name==null || name==""){  
+				  alert("Name can't be blank");  
+				  return false;  
+				}else if(password.length<6){  
+				  alert("Password must be at least 6 characters long.");  
+				  return false;  
+				  }  
+		}  
+		if ($('#remember').attr('checked')) 
+		{
+			var username = $('#username').attr("value");
+			var password = $('#password').attr("value");
+			$.cookie('username', username, { expires: 14 });
+			$.cookie('password', password, { expires: 14 });
+			$.cookie('remember', true, { expires: 14 });
+		} 
+		else 
+		{
+			$.cookie('username', null);
+			$.cookie('password', null);
+			$.cookie('remember', null);
+		}
+		var remember = $.cookie('remember');
+		if ( remember == 'true' ) {
+		var username = $.cookie('username');
+		var password = $.cookie('password');
+		// autofill the fields
+		$('#username').attr("value", username);
+		$('#password').attr("value", password);
+		
+	</script>
+</head>
+<body>
+	<center><h1>Login</h1></center>
+	<div class = "simpleform">
+		<form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="POST">
+			<div class="container">
+			    <label for="username"><b><h3>UserName</h3></b></label>
+			    <input type="text" placeholder="Enter Username" name="username" id = "username" class = "text" required>
+
+			    
+			    <label for="password"><b><h3>Password</h3></b></label>
+			    <input type="password" placeholder="Enter Password" name="password" id = "password" class = "text" required>
+			        
+		  	</div> <br> <br>
+		  	<div class = "container">
+		  		<input type="checkbox" name = "remember" id = "remember"> 
+		  		<label for="remember">Remember me</label>
+		  		<br><br>
+		  		<input type="submit" id = "abc" name = "submit" value = "Login">
+			    <input type="button" class="cancelbtn" id = "xyz" value = "Cancel">
+			    <br><br>
+			    <span class="psw"><a href="#">Forgot password?</a></span>
+		  	</div>
+	 	</form>
+	</div>
+
+
+</body>
+</html>
